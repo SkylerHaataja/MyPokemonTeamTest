@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Pokémon Scarlet · Singles Team | Gothitelle · Mimikyu · Iron Hands · Gholdengo · Meowscarada · Ceruledge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: #F2F9FF;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1a1e2a;
+            line-height: 1.5;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #FFCCE1;
+            color: #2d1b2a;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e2b3c, #3b2a3a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            padding: 0 0.5rem;
+        }
+
+        .subhead {
+            font-size: 0.9rem;
+            color: #3e4a5c;
+            max-width: 700px;
+            margin: 0.5rem auto 0;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            padding-top: 1rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 1.5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+                gap: 28px;
+            }
+            body {
+                padding: 2rem 1.5rem;
+            }
+            h1 {
+                font-size: 2.6rem;
+            }
+        }
+
+        .pokemon-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 204, 225, 0.6);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .pokemon-card:active {
+            transform: scale(0.99);
+        }
+
+        .card-inner {
+            padding: 1.2rem;
+        }
+
+        @media (min-width: 768px) {
+            .card-inner {
+                padding: 1.5rem;
+            }
+            .pokemon-card {
+                border-radius: 2rem;
+            }
+        }
+
+        .pokemon-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ffe0ec;
+            padding-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .pokemon-img {
+            background: #FFF0F5;
+            border-radius: 1.2rem;
+            padding: 0.3rem;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .pokemon-img {
+                width: 96px;
+                height: 96px;
+            }
+        }
+
+        .pokemon-img img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .pokemon-name h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        @media (min-width: 768px) {
+            .pokemon-name h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        .pokemon-name a {
+            color: #2b2f3e;
+            text-decoration: none;
+        }
+
+        .pokemon-name a:active {
+            color: #c74a7c;
+        }
+
+        .type-badges {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+
+        .mini-type {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #1f1f2b;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+        }
+
+        .tera-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #FFCCE1;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 0.3rem;
+        }
+
+        .tera-badge a {
+            color: #331e28;
+        }
+
+        .stat-row {
+            margin-bottom: 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            border-left: 3px solid #FFCCE1;
+            padding-left: 0.8rem;
+        }
+
+        .stat-label {
+            font-weight: 700;
+            color: #4a3b44;
+            min-width: 70px;
+        }
+
+        .stat-value {
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .link {
+            color: #bc5a8a;
+            text-decoration: none;
+            border-bottom: 1px dotted #ffb6d1;
+        }
+
+        .link:active {
+            color: #8a3f62;
+        }
+
+        .moves-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
+        }
+
+        .move-chip {
+            background: #fceef3;
+            border-radius: 30px;
+            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid #ffcedf;
+        }
+
+        .move-chip a {
+            color: #a23e68;
+            text-decoration: none;
+        }
+
+        .move-chip:active {
+            background: #FFCCE1;
+        }
+
+        .ev-detail {
+            font-family: monospace;
+            background: #e5eeff;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border-color: #ffe0ec;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #6c5f6b;
+            border-top: 1px solid #ffdae8;
+            padding-top: 1.5rem;
+        }
+
+        .type-matching-section {
+            background: rgba(255, 240, 245, 0.8);
+            border-radius: 1.5rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #FFCCE1;
+        }
+
+        @media (min-width: 768px) {
+            .type-matching-section {
+                padding: 1.5rem 1.2rem;
+                margin: 2rem 0;
+            }
+        }
+
+        .type-scroll-container {
+            margin: 1rem 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .type-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .type-cell {
+            flex: 0 0 auto;
+            min-width: 65px;
+            padding: 0.5rem 0.5rem;
+            text-align: center;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            color: #1f1f2b;
+            transition: transform 0.1s;
+        }
+
+        .type-cell:active {
+            transform: scale(0.96);
+        }
+
+        @media (min-width: 768px) {
+            .type-cell {
+                min-width: 75px;
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        .type-match-panel {
+            margin-top: 1rem;
+            background: white;
+            border-radius: 1.2rem;
+            border: 1px solid #FFCCE1;
+            overflow: hidden;
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            background: #FFCCE1;
+            font-weight: 700;
+            color: #2a1f2a;
+        }
+
+        .close-match {
+            cursor: pointer;
+            background: rgba(0,0,0,0.1);
+            width: 34px;
+            height: 34px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            font-size: 1.2rem;
+        }
+
+        .match-content {
+            padding: 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .match-pokemon-card {
+            background: #fef9fc;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            width: 105px;
+            text-align: center;
+            border: 1px solid #ffd9e8;
+        }
+
+        @media (min-width: 768px) {
+            .match-pokemon-card {
+                width: 125px;
+                padding: 0.6rem;
+            }
+        }
+
+        .match-pokemon-card img {
+            width: 60px;
+            height: auto;
+        }
+
+        @media (min-width: 768px) {
+            .match-pokemon-card img {
+                width: 70px;
+            }
+        }
+
+        .match-pokemon-card .pokemon-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin: 0.2rem 0;
+        }
+
+        .best-move {
+            font-size: 0.65rem;
+            background: #f2e6ec;
+            border-radius: 20px;
+            padding: 0.2rem 0.4rem;
+            display: inline-block;
+        }
+
+        .guide-container {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #FFCCE1;
+        }
+
+        @media (min-width: 768px) {
+            .guide-container {
+                padding: 1.2rem 1.8rem;
+                margin: 2rem 0;
+            }
+        }
+
+        .guide-details {
+            background: #fefafc;
+            border-radius: 1rem;
+            margin-bottom: 0.8rem;
+            border: 1px solid #ffe2ef;
+        }
+
+        .guide-summary {
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            list-style: none;
+            background: #FFF4F9;
+            border-radius: 1rem;
+        }
+
+        .guide-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .guide-summary::before {
+            content: "▶ ";
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-right: 0.6rem;
+            transition: transform 0.2s;
+        }
+
+        details[open] .guide-summary::before {
+            transform: rotate(90deg);
+        }
+
+        .guide-content {
+            padding: 0.8rem 1rem 1rem;
+            border-top: 1px solid #ffdae8;
+        }
+
+        .guide-content ul,
+        .guide-content p {
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+        }
+
+        .guide-content li {
+            margin-left: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="badge">✦ SINGLES MASTER TEAM ✦</div>
+        <h1>Ghostly Grace · Iron Fist · Magical Blade</h1>
+        <div class="subhead">Optimised for casual / in‑game battles | Hyper Trained IVs | Full type synergy analysis</div>
+    </div>
+
+    <div class="team-grid" id="team-grid"></div>
+
+    <!-- offense type matching -->
+    <div class="type-matching-section">
+        <div class="badge">TYPE MATCHING – OFFENSE</div>
+        <h3 style="margin: 0.5rem 0;">Best attacker against each type (best to worst)</h3>
+        <div class="type-scroll-container"><div class="type-list" id="offense-type-list"></div></div>
+        <div class="type-match-panel" id="offense-match-panel" style="display:none;">
+            <div class="match-header"><span id="offense-selected-type"></span><span class="close-match" id="close-offense-panel">✕</span></div>
+            <div class="match-content" id="offense-match-content"></div>
+        </div>
+    </div>
+
+    <!-- defense type matching -->
+    <div class="type-matching-section">
+        <div class="badge">TYPE MATCHING – DEFENSE</div>
+        <h3 style="margin: 0.5rem 0;">Best switch‑in against each move type</h3>
+        <div class="type-scroll-container"><div class="type-list" id="defense-type-list"></div></div>
+        <div class="type-match-panel" id="defense-match-panel" style="display:none;">
+            <div class="match-header"><span id="defense-selected-type"></span><span class="close-match" id="close-defense-panel">✕</span></div>
+            <div class="match-content" id="defense-match-content"></div>
+        </div>
+    </div>
+
+    <!-- guide sections -->
+    <div class="guide-container">
+        <div class="badge">TRAINER'S NOTEBOOK</div>
+        <h2 style="margin: 0.5rem 0 1rem;">From Catch to Champion</h2>
+        <details class="guide-details">
+            <summary class="guide-summary">1. IV Training – Hyper Train all stats</summary>
+            <div class="guide-content"><p>Buy <strong>6 Gold Bottle Caps</strong> at Delibird Presents (20k each). Fly to Montenevera, talk to the BP man with Abomasnow → Hyper Train each Pokémon. <a class="link" href="https://bulbapedia.bulbagarden.net/wiki/Hyper_Training" target="_blank">Full guide</a></p></div>
+        </details>
+        <details class="guide-details">
+            <summary class="guide-summary">2. EV Spreads (exact for each team member)</summary>
+            <div class="guide-content">
+                <ul>
+                    <li>Gothitelle: 252 HP / 252 SpA / 4 SpD (Modest)</li>
+                    <li>Mimikyu: 252 Atk / 4 SpD / 252 Spe (Jolly)</li>
+                    <li>Iron Hands: 252 HP / 252 Atk / 4 SpD (Adamant)</li>
+                    <li>Gholdengo: 252 HP / 252 SpA / 4 Spe (Modest)</li>
+                    <li>Meowscarada: 252 Atk / 4 SpD / 252 Spe (Jolly)</li>
+                    <li>Ceruledge: 252 Atk / 4 SpD / 252 Spe (Adamant)</li>
+                </ul>
+                <p>Train using Power items or Vitamins (Calcium, Carbos etc). <a class="link" href="https://bulbapedia.bulbagarden.net/wiki/EV" target="_blank">EV guide</a></p>
+            </div>
+        </details>
+        <details class="guide-details">
+            <summary class="guide-summary">3. Natures & Mints</summary>
+            <div class="guide-content"><p>Use Mints from Chansey Supply to lock: Modest (Gothitelle/Gholdengo), Jolly (Mimikyu/Meowscarada), Adamant (Iron Hands/Ceruledge). <a class="link" href="https://bulbapedia.bulbagarden.net/wiki/Mint" target="_blank">Mint list</a></p></div>
+        </details>
+        <details class="guide-details">
+            <summary class="guide-summary">4. Key Moves – where to find them</summary>
+            <div class="guide-content"><p><strong>Belly Drum (Iron Hands):</strong> egg move – Mirror Herb + Hariyama.<br>
+            <strong>Shadow Sneak (Mimikyu/Ceruledge):</strong> level up / TM.<br>
+            <strong>Recover (Gholdengo):</strong> TM (obtain from Porto Marinada).<br>
+            <strong>Flower Trick (Meowscarada):</strong> learns at Lv. 40. <a class="link" href="https://game8.co/games/Pokemon-Scarlet-Violet/archives/377887" target="_blank">Full move guide</a></p></div>
+        </details>
+        <details class="guide-details" open>
+            <summary class="guide-summary">5. Singles strategy & lead choices</summary>
+            <div class="guide-content">
+                <p><strong>Lead options:</strong> Mimikyu (Disguise + Swords Dance) or Meowscarada (fast U-turn). <br>
+                <strong>Mid‑game:</strong> Gholdengo blocks status; Iron Hands sets up Belly Drum vs. slower teams. <br>
+                <strong>Late clean:</strong> Ceruledge (Bitter Blade recovery) or Shadow Sneak priority.<br>
+                <strong>Gothitelle</strong> traps passive walls, forces favorable matchups.<br>
+                <a class="link" href="https://bulbapedia.bulbagarden.net/wiki/Singles_battle" target="_blank">Singles mechanics</a></p>
+            </div>
+        </details>
+        <details class="guide-details">
+            <summary class="guide-summary">6. Tera Raid adaptations</summary>
+            <div class="guide-content"><p>Iron Hands (Belly Drum + Drain Punch) solos most 5★ raids. Gholdengo (Nasty Plot + Metal Sound) works vs. status spammers. <a class="link" href="https://bulbapedia.bulbagarden.net/wiki/Tera_Raid_Battle" target="_blank">Raid guide</a></p></div>
+        </details>
+    </div>
+    <div class="footer-note">
+        💡 Click any link for full details (Bulbapedia/Game8). All images © Nintendo/GameFreak.<br>
+        Hyper Training recommended for all stats – use Bottle Caps in Montenevera.
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Type colors
+        const typeColors = {
+            "Normal":"#A8A878","Fire":"#F08030","Water":"#6890F0","Electric":"#F8D030","Grass":"#78C850","Ice":"#98D8D8","Fighting":"#C03028",
+            "Poison":"#A040A0","Ground":"#E0C068","Flying":"#A890F0","Psychic":"#F85888","Bug":"#A8B820","Rock":"#B8A038","Ghost":"#705898",
+            "Dragon":"#7038F8","Dark":"#705848","Steel":"#B8B8D0","Fairy":"#EE99AC"
+        };
+
+        // Team data (all images from Bulbapedia with consistent /250px- thumbnails)
+        const teamMembers = [
+            { 
+                name: "Gothitelle", 
+                image: "https://archives.bulbagarden.net/media/upload/thumb/d/d2/0576Gothitelle.png/250px-0576Gothitelle.png", 
+                types: ["Psychic"],
+                pokemonLink: "https://bulbapedia.bulbagarden.net/wiki/Gothitelle_(Pok%C3%A9mon)",
+                ability: "Shadow Tag", 
+                abilityLink: "https://bulbapedia.bulbagarden.net/wiki/Shadow_Tag_(Ability)",
+                nature: "Modest", 
+                natureLink: "https://bulbapedia.bulbagarden.net/wiki/Nature#Modest",
+                tera: "Fairy", 
+                teraLink: "https://bulbapedia.bulbagarden.net/wiki/Fairy_(type)",
+                item: "Leftovers", 
+                itemLink: "https://bulbapedia.bulbagarden.net/wiki/Leftovers",
+                ev: "252 HP / 252 SpA / 4 SpD",
+                moves: [
+                    { name: "Psychic", link: "https://bulbapedia.bulbagarden.net/wiki/Psychic_(move)", type: "Psychic", power: 90 },
+                    { name: "Thunderbolt", link: "https://bulbapedia.bulbagarden.net/wiki/Thunderbolt_(move)", type: "Electric", power: 90 },
+                    { name: "Shadow Ball", link: "https://bulbapedia.bulbagarden.net/wiki/Shadow_Ball_(move)", type: "Ghost", power: 80 },
+                    { name: "Calm Mind", link: "https://bulbapedia.bulbagarden.net/wiki/Calm_Mind_(move)", type: "Psychic", power: 0 }
+                ],
+                notes: "Trapper; Calm Mind boosts SpA/SpD." 
+            },
+            { 
+                name: "Mimikyu", 
+                image: "https://archives.bulbagarden.net/media/upload/thumb/4/41/0778Mimikyu.png/250px-0778Mimikyu.png", 
+                types: ["Ghost","Fairy"],
+                pokemonLink: "https://bulbapedia.bulbagarden.net/wiki/Mimikyu_(Pok%C3%A9mon)",
+                ability: "Disguise", 
+                abilityLink: "https://bulbapedia.bulbagarden.net/wiki/Disguise_(Ability)",
+                nature: "Jolly", 
+                natureLink: "https://bulbapedia.bulbagarden.net/wiki/Nature#Jolly",
+                tera: "Ghost", 
+                teraLink: "https://bulbapedia.bulbagarden.net/wiki/Ghost_(type)",
+                item: "Life Orb", 
+                itemLink: "https://bulbapedia.bulbagarden.net/wiki/Life_Orb",
+                ev: "252 Atk / 4 SpD / 252 Spe",
+                moves: [
+                    { name: "Swords Dance", link: "https://bulbapedia.bulbagarden.net/wiki/Swords_Dance_(move)", type: "Normal", power: 0 },
+                    { name: "Shadow Sneak", link: "https://bulbapedia.bulbagarden.net/wiki/Shadow_Sneak_(move)", type: "Ghost", power: 40 },
+                    { name: "Play Rough", link: "https://bulbapedia.bulbagarden.net/wiki/Play_Rough_(move)", type: "Fairy", power: 90 },
+                    { name: "Shadow Claw", link: "https://bulbapedia.bulbagarden.net/wiki/Shadow_Claw_(move)", type: "Ghost", power: 70 }
+                ],
+                notes: "Disguise guarantees setup. Priority Shadow Sneak." 
+            },
+            { 
+                name: "Iron Hands", 
+                image: "https://archives.bulbagarden.net/media/upload/thumb/2/25/0992Iron_Hands.png/250px-0992Iron_Hands.png", 
+                types: ["Fighting","Electric"],
+                pokemonLink: "https://bulbapedia.bulbagarden.net/wiki/Iron_Hands_(Pok%C3%A9mon)",
+                ability: "Quark Drive", 
+                abilityLink: "https://bulbapedia.bulbagarden.net/wiki/Quark_Drive_(Ability)",
+                nature: "Adamant", 
+                natureLink: "https://bulbapedia.bulbagarden.net/wiki/Nature#Adamant",
+                tera: "Grass", 
+                teraLink: "https://bulbapedia.bulbagarden.net/wiki/Grass_(type)",
+                item: "Sitrus Berry", 
+                itemLink: "https://bulbapedia.bulbagarden.net/wiki/Sitrus_Berry",
+                ev: "252 HP / 252 Atk / 4 SpD",
+                moves: [
+                    { name: "Belly Drum", link: "https://bulbapedia.bulbagarden.net/wiki/Belly_Drum_(move)", type: "Normal", power: 0 },
+                    { name: "Drain Punch", link: "https://bulbapedia.bulbagarden.net/wiki/Drain_Punch_(move)", type: "Fighting", power: 75 },
+                    { name: "Wild Charge", link: "https://bulbapedia.bulbagarden.net/wiki/Wild_Charge_(move)", type: "Electric", power: 90 },
+                    { name: "Ice Punch", link: "https://bulbapedia.bulbagarden.net/wiki/Ice_Punch_(move)", type: "Ice", power: 75 }
+                ],
+                notes: "Belly Drum + Drain Punch = massive heal." 
+            },
+            { 
+                name: "Gholdengo", 
+                image: "https://archives.bulbagarden.net/media/upload/thumb/2/2d/1000Gholdengo.png/250px-1000Gholdengo.png", 
+                types: ["Steel","Ghost"],
+                pokemonLink: "https://bulbapedia.bulbagarden.net/wiki/Gholdengo_(Pok%C3%A9mon)",
+                ability: "Good as Gold", 
+                abilityLink: "https://bulbapedia.bulbagarden.net/wiki/Good_as_Gold_(Ability)",
+                nature: "Modest", 
+                natureLink: "https://bulbapedia.bulbagarden.net/wiki/Nature#Modest",
+                tera: "Flying", 
+                teraLink: "https://bulbapedia.bulbagarden.net/wiki/Flying_(type)",
+                item: "Leftovers", 
+                itemLink: "https://bulbapedia.bulbagarden.net/wiki/Leftovers",
+                ev: "252 HP / 252 SpA / 4 Spe",
+                moves: [
+                    { name: "Nasty Plot", link: "https://bulbapedia.bulbagarden.net/wiki/Nasty_Plot_(move)", type: "Dark", power: 0 },
+                    { name: "Make It Rain", link: "https://bulbapedia.bulbagarden.net/wiki/Make_It_Rain_(move)", type: "Steel", power: 120 },
+                    { name: "Shadow Ball", link: "https://bulbapedia.bulbagarden.net/wiki/Shadow_Ball_(move)", type: "Ghost", power: 80 },
+                    { name: "Recover", link: "https://bulbapedia.bulbagarden.net/wiki/Recover_(move)", type: "Normal", power: 0 }
+                ],
+                notes: "Immune to status; good special wall." 
+            },
+            { 
+                name: "Meowscarada", 
+                image: "https://archives.bulbagarden.net/media/upload/thumb/6/6f/0908Meowscarada.png/250px-0908Meowscarada.png", 
+                types: ["Grass","Dark"],
+                pokemonLink: "https://bulbapedia.bulbagarden.net/wiki/Meowscarada_(Pok%C3%A9mon)",
+                ability: "Protean", 
+                abilityLink: "https://bulbapedia.bulbagarden.net/wiki/Protean_(Ability)",
+                nature: "Jolly", 
+                natureLink: "https://bulbapedia.bulbagarden.net/wiki/Nature#Jolly",
+                tera: "Dark", 
+                teraLink: "https://bulbapedia.bulbagarden.net/wiki/Dark_(type)",
+                item: "Choice Band", 
+                itemLink: "https://bulbapedia.bulbagarden.net/wiki/Choice_Band",
+                ev: "252 Atk / 4 SpD / 252 Spe",
+                moves: [
+                    { name: "Flower Trick", link: "https://bulbapedia.bulbagarden.net/wiki/Flower_Trick_(move)", type: "Grass", power: 70 },
+                    { name: "Knock Off", link: "https://bulbapedia.bulbagarden.net/wiki/Knock_Off_(move)", type: "Dark", power: 65 },
+                    { name: "U-turn", link: "https://bulbapedia.bulbagarden.net/wiki/U-turn_(move)", type: "Bug", power: 70 },
+                    { name: "Play Rough", link: "https://bulbapedia.bulbagarden.net/wiki/Play_Rough_(move)", type: "Fairy", power: 90 }
+                ],
+                notes: "Protean adapts type; Flower Trick always crits." 
+            },
+            { 
+                name: "Ceruledge", 
+                image: "https://archives.bulbagarden.net/media/upload/thumb/f/f0/0937Ceruledge.png/250px-0937Ceruledge.png", 
+                types: ["Fire","Ghost"],
+                pokemonLink: "https://bulbapedia.bulbagarden.net/wiki/Ceruledge_(Pok%C3%A9mon)",
+                ability: "Flash Fire", 
+                abilityLink: "https://bulbapedia.bulbagarden.net/wiki/Flash_Fire_(Ability)",
+                nature: "Adamant", 
+                natureLink: "https://bulbapedia.bulbagarden.net/wiki/Nature#Adamant",
+                tera: "Fire", 
+                teraLink: "https://bulbapedia.bulbagarden.net/wiki/Fire_(type)",
+                item: "Life Orb", 
+                itemLink: "https://bulbapedia.bulbagarden.net/wiki/Life_Orb",
+                ev: "252 Atk / 4 SpD / 252 Spe",
+                moves: [
+                    { name: "Swords Dance", link: "https://bulbapedia.bulbagarden.net/wiki/Swords_Dance_(move)", type: "Normal", power: 0 },
+                    { name: "Bitter Blade", link: "https://bulbapedia.bulbagarden.net/wiki/Bitter_Blade_(move)", type: "Fire", power: 90 },
+                    { name: "Shadow Sneak", link: "https://bulbapedia.bulbagarden.net/wiki/Shadow_Sneak_(move)", type: "Ghost", power: 40 },
+                    { name: "Close Combat", link: "https://bulbapedia.bulbagarden.net/wiki/Close_Combat_(move)", type: "Fighting", power: 120 }
+                ],
+                notes: "Bitter Blade heals; excellent late-game cleaner." 
+            }
+        ];
+
+        // Build Pokémon cards
+        function buildCards() {
+            const grid = document.getElementById("team-grid");
+            if (!grid) return;
+            grid.innerHTML = '';
+            for (const p of teamMembers) {
+                const typeBadgesHtml = p.types.map(t => `<span class="mini-type" style="background: ${typeColors[t] || '#CCCCCC'};">${t}</span>`).join('');
+                const movesHtml = p.moves.map(m => `<div class="move-chip"><a href="${m.link}" target="_blank" rel="noopener">${m.name}</a></div>`).join('');
+                const card = document.createElement("div");
+                card.className = "pokemon-card";
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <div class="pokemon-header">
+                            <div class="pokemon-img"><a href="${p.pokemonLink}" target="_blank"><img src="${p.image}" alt="${p.name}" loading="lazy"></a></div>
+                            <div class="pokemon-name">
+                                <h2><a href="${p.pokemonLink}" target="_blank">${p.name}</a></h2>
+                                <div class="type-badges">${typeBadgesHtml}</div>
+                                <div class="tera-badge"><span>🌀 Tera:</span> <a class="link" href="${p.teraLink}" target="_blank">${p.tera}</a></div>
+                            </div>
+                        </div>
+                        <div class="stat-row"><div class="stat-label">Ability</div><div class="stat-value"><a class="link" href="${p.abilityLink}" target="_blank">${p.ability}</a></div></div>
+                        <div class="stat-row"><div class="stat-label">Nature</div><div class="stat-value"><a class="link" href="${p.natureLink}" target="_blank">${p.nature}</a></div></div>
+                        <div class="stat-row"><div class="stat-label">Item</div><div class="stat-value"><a class="link" href="${p.itemLink}" target="_blank">${p.item}</a></div></div>
+                        <div class="stat-row"><div class="stat-label">EVs</div><div class="stat-value"><span class="ev-detail">${p.ev}</span></div></div>
+                        <div class="stat-row" style="flex-direction:column; align-items:start;"><div class="stat-label">Moves</div><div class="moves-list">${movesHtml}</div></div>
+                        <div class="stat-row"><div class="stat-label">✨ Tip</div><div class="stat-value">${p.notes}</div></div>
+                        <hr><div class="stat-value" style="font-size:0.7rem; text-align:center;">⭐ Hyper Trained IVs | Lv.50+ ready</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        // Type effectiveness chart
+        const typeChart = {
+            "Normal": { "Rock": 0.5, "Steel": 0.5, "Ghost": 0 }, "Fire": { "Fire": 0.5, "Water": 0.5, "Rock": 0.5, "Dragon": 0.5, "Grass": 2, "Ice": 2, "Bug": 2, "Steel": 2 },
+            "Water": { "Water": 0.5, "Grass": 0.5, "Dragon": 0.5, "Fire": 2, "Ground": 2, "Rock": 2 }, "Electric": { "Electric": 0.5, "Grass": 0.5, "Dragon": 0.5, "Ground": 0, "Water": 2, "Flying": 2 },
+            "Grass": { "Grass": 0.5, "Fire": 0.5, "Poison": 0.5, "Flying": 0.5, "Bug": 0.5, "Dragon": 0.5, "Steel": 0.5, "Water": 2, "Ground": 2, "Rock": 2 },
+            "Ice": { "Ice": 0.5, "Water": 0.5, "Fire": 0.5, "Steel": 0.5, "Grass": 2, "Ground": 2, "Flying": 2, "Dragon": 2 },
+            "Fighting": { "Normal": 2, "Ice": 2, "Rock": 2, "Dark": 2, "Steel": 2, "Poison": 0.5, "Flying": 0.5, "Psychic": 0.5, "Bug": 0.5, "Fairy": 0.5, "Ghost": 0 },
+            "Poison": { "Grass": 2, "Fairy": 2, "Poison": 0.5, "Ground": 0.5, "Rock": 0.5, "Ghost": 0.5, "Steel": 0 }, "Ground": { "Fire": 2, "Electric": 2, "Poison": 2, "Rock": 2, "Steel": 2, "Grass": 0.5, "Bug": 0.5, "Flying": 0 },
+            "Flying": { "Grass": 2, "Fighting": 2, "Bug": 2, "Electric": 0.5, "Rock": 0.5, "Steel": 0.5 }, "Psychic": { "Fighting": 2, "Poison": 2, "Psychic": 0.5, "Steel": 0.5, "Dark": 0 },
+            "Bug": { "Grass": 2, "Psychic": 2, "Dark": 2, "Fire": 0.5, "Flying": 0.5, "Rock": 0.5, "Steel": 0.5 }, "Rock": { "Fire": 2, "Ice": 2, "Flying": 2, "Bug": 2, "Fighting": 0.5, "Ground": 0.5, "Steel": 0.5 },
+            "Ghost": { "Ghost": 2, "Psychic": 2, "Dark": 0.5, "Normal": 0 }, "Dragon": { "Dragon": 2, "Steel": 0.5, "Fairy": 0 }, "Dark": { "Psychic": 2, "Ghost": 2, "Fighting": 0.5, "Dark": 0.5, "Fairy": 0.5 },
+            "Steel": { "Ice": 2, "Rock": 2, "Fairy": 2, "Fire": 0.5, "Water": 0.5, "Electric": 0.5, "Steel": 0.5 }, "Fairy": { "Fighting": 2, "Dragon": 2, "Dark": 2, "Fire": 0.5, "Poison": 0.5, "Steel": 0.5 }
+        };
+
+        function getOffenseDamage(pokemon, targetType) {
+            let best = { damage: 0, moveName: "None", movePower: 0, effText: "" };
+            for (let m of pokemon.moves) {
+                if (!m.power || m.power === 0) continue;
+                let eff = typeChart[m.type]?.[targetType] ?? 1;
+                if (eff === 0) continue;
+                let stab = (pokemon.types.includes(m.type) ? 1.5 : 1);
+                let dmg = m.power * eff * stab;
+                if (dmg > best.damage) {
+                    best = { damage: dmg, moveName: m.name, movePower: m.power, effText: eff === 2 ? " (super effective)" : eff === 0.5 ? " (not very effective)" : "" };
+                }
+            }
+            return best;
+        }
+
+        function getDefenseMultiplier(pokemon, moveType) {
+            let mult = 1;
+            for (let t of pokemon.types) mult *= typeChart[moveType]?.[t] ?? 1;
+            return mult;
+        }
+        function formatMult(m) { if(m===0) return "Immune"; if(m===0.25) return "1/4x"; if(m===0.5) return "1/2x"; return m===1 ? "1x" : `${m}x`; }
+
+        // Build offense type buttons
+        const offenseContainer = document.getElementById("offense-type-list");
+        const offensePanel = document.getElementById("offense-match-panel");
+        const offenseContent = document.getElementById("offense-match-content");
+        const offenseSelected = document.getElementById("offense-selected-type");
+        document.getElementById("close-offense-panel")?.addEventListener("click", () => offensePanel.style.display = "none");
+        
+        for (let type in typeColors) {
+            const cell = document.createElement("div");
+            cell.className = "type-cell";
+            cell.textContent = type;
+            cell.style.backgroundColor = typeColors[type];
+            cell.addEventListener("click", () => {
+                const sorted = teamMembers.map(p => ({ pokemon: p, ...getOffenseDamage(p, type) })).sort((a,b) => b.damage - a.damage);
+                offenseSelected.textContent = `Best attackers against ${type}`;
+                offenseContent.innerHTML = sorted.map(item => `
+                    <div class="match-pokemon-card">
+                        <img src="${item.pokemon.image}" alt="${item.pokemon.name}">
+                        <div class="pokemon-name">${item.pokemon.name}</div>
+                        <div class="best-move">${item.moveName !== "None" ? `${item.moveName} ${item.movePower} power${item.effText}` : "No good move"}</div>
+                    </div>
+                `).join('');
+                offensePanel.style.display = "block";
+            });
+            offenseContainer.appendChild(cell);
+        }
+
+        // Build defense type buttons
+        const defenseContainer = document.getElementById("defense-type-list");
+        const defensePanel = document.getElementById("defense-match-panel");
+        const defenseContent = document.getElementById("defense-match-content");
+        const defenseSelected = document.getElementById("defense-selected-type");
+        document.getElementById("close-defense-panel")?.addEventListener("click", () => defensePanel.style.display = "none");
+        
+        for (let moveType in typeColors) {
+            const cell = document.createElement("div");
+            cell.className = "type-cell";
+            cell.textContent = moveType;
+            cell.style.backgroundColor = typeColors[moveType];
+            cell.addEventListener("click", () => {
+                const sorted = teamMembers.map(p => ({ pokemon: p, mult: getDefenseMultiplier(p, moveType), bestMove: getOffenseDamage(p, moveType) })).sort((a,b) => a.mult - b.mult);
+                defenseSelected.textContent = `Switch‑in against ${moveType} moves`;
+                defenseContent.innerHTML = sorted.map(item => `
+                    <div class="match-pokemon-card">
+                        <img src="${item.pokemon.image}" alt="${item.pokemon.name}">
+                        <div class="pokemon-name">${item.pokemon.name}</div>
+                        <div class="best-move">Damage: ${formatMult(item.mult)}</div>
+                        <div class="best-move" style="margin-top:4px;">Best answer: ${item.bestMove.moveName !== "None" ? `${item.bestMove.moveName} ${item.bestMove.movePower}${item.bestMove.effText}` : "None"}</div>
+                    </div>
+                `).join('');
+                defensePanel.style.display = "block";
+            });
+            defenseContainer.appendChild(cell);
+        }
+
+        buildCards();
+    })();
+</script>
+</body>
+</html>
